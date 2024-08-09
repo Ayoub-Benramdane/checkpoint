@@ -6,27 +6,31 @@ import (
 )
 
 func main() {
-	args := os.Args[1:]
-	if len(args) != 1 || args[0] == "" {
+	if len(os.Args) != 2 {
 		fmt.Println()
 		return
 	}
-	isFirst := true
-	res := ""
-	for _, c := range args[0] {
-		if isFirst {
-			if c != ' ' {
-				res += string(c)
-				isFirst = false
+	str := ""
+	isClean := false
+	for i, c := range os.Args[1] {
+		if c == ' ' && isClean {
+			isClean = false
+			str += string(c)
+		} else if c != ' ' {
+			if Check(os.Args[1], i) {
+				isClean = true
 			}
-		} else {
-			if c == ' ' {
-				res += string(c)
-				isFirst = true
-			} else {
-				res += string(c)
-			}
+			str += string(c)
 		}
 	}
-	fmt.Println(res)
+	fmt.Println(str)
+}
+
+func Check(s string, indic int) bool {
+	for i := indic; i < len(s); i++ {
+		if s[i] != ' ' {
+			return true
+		}
+	}
+	return false
 }

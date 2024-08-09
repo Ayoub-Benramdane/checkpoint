@@ -6,17 +6,16 @@ import (
 )
 
 func main() {
-	args := os.Args
-	res := ""
-	if len(args) != 4 {
+	if len(os.Args) != 4 {
 		return
 	}
-	for i := 0; i < len(args[1]); i++ {
-		if string(args[1][i]) == args[2] {
-			res += string(args[3])
+	str := ""
+	for _, c := range os.Args[1] {
+		if string(c) == os.Args[2] {
+			str += os.Args[3]
 		} else {
-			res += string(args[1][i])
+			str += string(c)
 		}
 	}
-	fmt.Println(res)
+	fmt.Println(str)
 }

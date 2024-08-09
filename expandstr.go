@@ -7,24 +7,30 @@ import (
 
 func main() {
 	if len(os.Args) != 2 {
+		fmt.Println()
 		return
 	}
-	count := 0
-	res := ""
-	isFirst := true
-	for i := 0; i < len(os.Args[1]); i++ {
-		if isFirst && os.Args[1][i] == ' ' {
-			continue
-		}
-		isFirst = false
-		if os.Args[1][i] == ' ' && res != "" {
-			count++
-		} else if count != 0 {
-			res += "   " + string(os.Args[1][i])
-			count = 0
-		} else {
-			res += string(os.Args[1][i])
+	str := ""
+	isClean := false
+	for i, c := range os.Args[1] {
+		if c == ' ' && isClean {
+			isClean = false
+			str += "   "
+		} else if c != ' ' {
+			if Check(os.Args[1], i) {
+				isClean = true
+			}
+			str += string(c)
 		}
 	}
-	fmt.Println(res)
+	fmt.Println(str)
+}
+
+func Check(s string, indic int) bool {
+	for i := indic; i < len(s); i++ {
+		if s[i] != ' ' {
+			return true
+		}
+	}
+	return false
 }

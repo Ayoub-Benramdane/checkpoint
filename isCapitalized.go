@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
 	fmt.Println(IsCapitalized("Hello! How are you?"))
@@ -12,15 +14,18 @@ func main() {
 }
 
 func IsCapitalized(s string) bool {
-	g := []rune(s)
-	if len(s) == 0 || g[0] >= 'a' && g[0] <= 'z' {
+	isFirst := true
+	if s == "" {
 		return false
 	}
-	for i := 0; i < len(s); i++ {
-		if g[i] == ' ' {
-			if g[i+1] >= 'a' && g[i+1] <= 'z' {
-				return false
-			}
+	for _, c := range s {
+		if isFirst && c >= 'a' && c <= 'z' {
+			return false
+		}
+		if c < '0' || c > '9' && c < 'A' || c > 'Z' && c < 'a' || c > 'z' {
+			isFirst = true
+		} else {
+			isFirst = false
 		}
 	}
 	return true

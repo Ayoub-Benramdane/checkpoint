@@ -15,32 +15,29 @@ func main() {
 
 func Slice(a []string, nbrs ...int) []string {
 	res := []string{}
-	for i := 0; i < len(a); i++ {
+	if nbrs[0] > 0 {
 		if len(nbrs) == 1 {
-			if nbrs[0] > 0 {
-				if i >= nbrs[0] && i < len(a) {
-					res = append(res, a[i])
-				}
-			} else if nbrs[0] < 0 {
-				if i >= len(a)+nbrs[0] && i < len(a) {
-					res = append(res, a[i])
-				}
+			for i := nbrs[0]; i < len(a); i++ {
+				res = append(res, a[i])
 			}
 		} else {
-			if nbrs[1] > nbrs[0] {
-				if nbrs[0] > 0 {
-					if i >= nbrs[0] && i < nbrs[1] {
-						res = append(res, a[i])
-					}
-				} else {
-					if i >= len(a)+nbrs[0] && i < len(a)+nbrs[1] {
-						res = append(res, a[i])
-					}
-				}
-			} else {
-				return nil
+			for i := nbrs[0]; i < nbrs[1]; i++ {
+				res = append(res, a[i])
 			}
 		}
+	} else {
+		if len(nbrs) == 1 {
+			for i := len(a) + nbrs[0]; i < len(a); i++ {
+				res = append(res, a[i])
+			}
+		} else {
+			for i := len(a) + nbrs[0]; i < len(a)+nbrs[1]; i++ {
+				res = append(res, a[i])
+			}
+		}
+	}
+	if len(res) == 0 {
+		return nil
 	}
 	return res
 }

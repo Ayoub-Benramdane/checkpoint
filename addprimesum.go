@@ -3,38 +3,44 @@ package main
 import (
 	"fmt"
 	"os"
-	"strconv"
 )
 
 func main() {
-	args := os.Args[1:]
-	prime := true
-	res := []int{}
-	resFinal := 0
-	if len(args) != 1 {
-		fmt.Println(resFinal)
+	if len(os.Args) != 2 {
+		fmt.Println("0")
 		return
 	}
-	arg, _ := strconv.Atoi(args[0])
-	if arg < 0 {
-		fmt.Println(resFinal)
+	nb := atoi(os.Args[1])
+	if nb < 2 {
+		fmt.Println("0")
 		return
 	}
-	for i := arg; i >= 2; i-- {
+	n := 0
+	if nb < 4 {
+		n = nb
+	}
+	for i := 2; i <= nb; i++ {
+		isPrime := true
 		for j := 2; j < i; j++ {
 			if i%j == 0 {
-				prime = false
+				isPrime = false
 				break
 			}
 		}
-		if prime {
-			res = append(res, i)
+		if isPrime {
+			n += i
 		}
-		prime = true
 	}
-	for i := 0; i < len(res); i++ {
-		resFinal += res[i]
+	fmt.Println(n)
+}
+
+func atoi(s string) int {
+	n := 0
+	for _, c := range s {
+		if c < '0' || c > '9' {
+			return -1
+		}
+		n = n*10 + int(c-'0')
 	}
-	fmt.Println(res)
-	fmt.Println(resFinal)
+	return n
 }
