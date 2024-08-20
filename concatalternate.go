@@ -14,18 +14,12 @@ func main() {
 func ConcatAlternate(slice1, slice2 []int) []int {
 	slice := []int{}
 	if len(slice1) >= len(slice2) {
-		for i := 0; i < len(slice1); i++ {
+		slice1, slice2 = slice2, slice1
+	}
+	for i := 0; i < len(slice2); i++ {
+		slice = append(slice, slice2[i])
+		if i < len(slice1) {
 			slice = append(slice, slice1[i])
-			if i < len(slice2) {
-				slice = append(slice, slice2[i])
-			}
-		}
-	} else {
-		for i := 0; i < len(slice2); i++ {
-			slice = append(slice, slice2[i])
-			if i < len(slice1) {
-				slice = append(slice, slice1[i])
-			}
 		}
 	}
 	return slice
