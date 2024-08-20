@@ -9,19 +9,25 @@ func main() {
 	fmt.Println(CamelToSnakeCase("helloWorld"))
 	fmt.Println(CamelToSnakeCase("camelCase"))
 	fmt.Println(CamelToSnakeCase("CAMELtoSnackCASE"))
-	fmt.Println(CamelToSnakeCase("camelToSnakeCase"))
+	fmt.Println(CamelToSnakeCase("camelToSna.keCase"))
 	fmt.Println(CamelToSnakeCase("hey2"))
 }
 
 func CamelToSnakeCase(s string) string {
 	str := ""
-	isValid := false
-	if !(s[len(s)-1] >= 'A' && s[len(s)-1] <= 'Z') {
-		isValid = true
+	if s[len(s)-1] >= 'A' && s[len(s)-1] <= 'Z' {
+		return s
 	}
 	for i, c := range s {
-		if isValid && i != 0 && c >= 'A' && c <= 'Z' {
-			str += "_"
+		if c >= 'A' && c <= 'Z' {
+			if s[i+1] >= 'A' && s[i+1] <= 'Z' {
+				return s
+			}
+			if i != 0 {
+				str += "_"
+			}
+		} else if c < 'a' || c > 'z' {
+			return s
 		}
 		str += string(c)
 	}

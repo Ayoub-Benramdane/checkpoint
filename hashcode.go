@@ -12,14 +12,13 @@ func main() {
 }
 
 func HashCode(dec string) string {
-	hash := ""
-	length := len(dec)
-	for i := 0; i < length; i++ {
-		hashValue := (int(dec[i]) + length) % 127
-		if hashValue < 32 {
-			hashValue += 33
+	str := ""
+	for i := 0; i < len(dec); i++ {
+		char := (int(dec[i]) + len(dec)) % 127
+		if char < 33 {
+			char += 33
 		}
-		hash += string(rune(hashValue))
+		str += string(char)
 	}
-	return hash
+	return str
 }

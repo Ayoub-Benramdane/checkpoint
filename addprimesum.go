@@ -16,9 +16,6 @@ func main() {
 		return
 	}
 	n := 0
-	if nb < 4 {
-		n = nb
-	}
 	for i := 2; i <= nb; i++ {
 		isPrime := true
 		for j := 2; j < i; j++ {

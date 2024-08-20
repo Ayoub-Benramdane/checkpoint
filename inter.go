@@ -9,17 +9,21 @@ func main() {
 	if len(os.Args) != 3 {
 		return
 	}
-	arg1 := os.Args[1]
-	arg2 := os.Args[2]
-	resFianl := make(map[string]bool)
-	for _, char := range arg1 {
-		for _, char1 := range arg2 {
-			if char == char1 {
-				if !resFianl[string(char)] {
-					fmt.Printf(string(char))
-					resFianl[string(char)] = true
-				}
+	str := ""
+	for _, c := range os.Args[1] {
+		for _, v := range os.Args[2] {
+			if v == c {
+				str += string(c)
+				break
 			}
 		}
 	}
+	for i := 0; i < len(str); i++ {
+		for j := i + 1; j < len(str); j++ {
+			if str[i] == str[j] {
+				str = str[:j] + str[j+1:]
+			}
+		}
+	}
+	fmt.Println(str)
 }

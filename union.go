@@ -6,18 +6,18 @@ import (
 )
 
 func main() {
-	input := os.Args[1] + os.Args[2]
-	res := make(map[string]bool)
-	res1 := make(map[string]int)
-	for _, char := range input {
-		res1[string(char)]++
+	if len(os.Args) != 3 {
+		fmt.Println()
+		return
 	}
-	fmt.Println(res1)
-	for _, char := range input {
-		if !res[string(char)] {
-			fmt.Printf(string(char))
-			res[string(char)] = true
+	str := os.Args[1] + os.Args[2]
+	for i := 0; i < len(str); i++ {
+		for j := i + 1; j < len(str); j++ {
+			if str[i] == str[j] {
+				str = str[:j] + str[j+1:]
+				i = 0
+			}
 		}
 	}
-	fmt.Println()
+	fmt.Println(str)
 }

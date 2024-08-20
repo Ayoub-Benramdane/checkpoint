@@ -35,11 +35,14 @@ func FromTo(from int, to int) string {
 }
 
 func itoa(n int) string {
-	s := ""
-	nb := n
+	var s, sign string
 	if n == 0 {
-		return "0"
+		return "00"
+	} else if n < 0 {
+		n = -n
+		sign = "-"
 	}
+	nb := n
 	for n != 0 {
 		s = string(n%10+'0') + s
 		n /= 10
@@ -47,5 +50,5 @@ func itoa(n int) string {
 	if nb > 0 && nb < 10 {
 		s = "0" + s
 	}
-	return s
+	return sign + s
 }

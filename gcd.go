@@ -5,23 +5,22 @@ import (
 )
 
 func main() {
-	fmt.Println(Gcd(42, 10))
+	fmt.Println(Gcd(42, 5))
 	fmt.Println(Gcd(42, 12))
 	fmt.Println(Gcd(14, 77))
 	fmt.Println(Gcd(17, 3))
 }
 
 func Gcd(a, b uint) uint {
-	var res uint
-	n := 0
+	var res, n uint
 	if a > b {
-		n = int(b)
+		n = b
 	} else {
-		n = int(a)
+		n = a
 	}
-	for i := 1; i <= n; i++ {
-		if int(a)%i == 0 && int(b)%i == 0 {
-			res = uint(i)
+	for i := uint(1); i <= n; i++ {
+		if a%i == 0 && b%i == 0 {
+			res = i
 		}
 	}
 	return res

@@ -17,26 +17,20 @@ func main() {
 }
 
 func FoldInt(f func(int, int) int, a []int, n int) {
-	for i := 0; i < len(a); i++ {
-		n = f(a[i], n)
+	for _, c := range a {
+		n = f(c, n)
 	}
 	fmt.Println(n)
 }
 
-func Add(nb, nb2 int) int {
-	res := 0
-	res = nb + nb2
-	return res
+func Add(a, b int) int {
+	return a + b
 }
 
-func Mul(nb, nb2 int) int {
-	res := 0
-	res = nb * nb2
-	return res
+func Mul(a, b int) int {
+	return a * b
 }
 
-func Sub(nb, nb2 int) int {
-	res := 0
-	res = nb2 - nb
-	return res
+func Sub(a, b int) int {
+	return b - a
 }

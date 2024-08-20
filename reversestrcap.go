@@ -6,43 +6,23 @@ import (
 )
 
 func main() {
-	args := os.Args[1:]
 	str := ""
-	for _, c := range args {
-		for _, v := range c {
-			if v >= 'A' && v <= 'Z' {
-				v += 32
+	for _, c := range os.Args[1:] {
+		runes := []rune(c)
+		for i := range runes {
+			if i == len(c)-1 && runes[i] >= 'a' && runes[i] <= 'z' {
+				str += string(runes[i] - 32)
+			} else if runes[i] == ' ' && str[len(str)-1] >= 'a' && str[len(str)-1] <= 'z' {
+				str += string(str[len(str)-1] - 32)
+				str = str[:len(str)-2] + str[len(str)-1:]
+				str += string(runes[i])
+			} else if runes[i] >= 'A' && runes[i] <= 'Z' {
+				str += string(runes[i] + 32)
+			} else {
+				str += string(runes[i])
 			}
-			str += string(v)
 		}
 		str += "\n"
 	}
-	myString := ""
-	for i := 0; i < len(str); i++ {
-		if i == len(str)-1 {
-			break
-		}
-		if str[i+1] == ' ' {
-			if str[i] >= 'a' && str[i] <= 'z' {
-				myString += string(str[i] - 32)
-			} else {
-				myString += string(str[i])
-
-			}
-		} else {
-			if str[i+1] == '\n' {
-				if str[i] >= 'a' && str[i] <= 'z' {
-					myString += string(str[i] - 32)
-				} else {
-
-					myString += string(str[i])
-				}
-			} else {
-				myString += string(str[i])
-
-			}
-		}
-
-	}
-	fmt.Println(myString)
+	fmt.Print(str)
 }

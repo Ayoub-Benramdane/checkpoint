@@ -6,23 +6,20 @@ import (
 )
 
 func main() {
-	args := os.Args[1:]
-	if len(args) != 2 {
+	if len(os.Args) != 3 {
 		return
 	}
-	indice := 0
-	for _, c := range args[0] {
-		valid := false
-		for i := indice; i < len(args[1]); i++ {
-			indice++
-			if c == rune(args[1][i]) {
-				valid = true
+	var indic, ln int
+	for i := 0; i < len(os.Args[1]); i++ {
+		for j := indic; j < len(os.Args[2]); j++ {
+			indic++
+			if os.Args[1][i] == os.Args[2][j] {
+				ln++
 				break
 			}
 		}
-		if !valid {
-			return
-		}
 	}
-	fmt.Println(args[0])
+	if ln == len(os.Args[1]) {
+		fmt.Println(os.Args[1])
+	}
 }

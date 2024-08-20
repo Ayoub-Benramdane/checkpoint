@@ -7,40 +7,23 @@ import (
 )
 
 func main() {
-	args := os.Args[1:]
-	if len(args) != 1 {
+	if len(os.Args) != 2 {
 		return
 	}
-	n, err := strconv.Atoi(args[0])
-	if err != nil || n <= 1 {
+	nb, err := strconv.Atoi(os.Args[1])
+	if err != nil || nb < 2 {
 		return
 	}
-	Fprime(n)
-}
-
-func Fprime(n int) {
-	for i := 2;n/i != 0;i++ {
-		if n%i == 0 {
-			if n/i != 1 {
+	for i := 2; nb/i != 0; i++ {
+		if nb%i == 0 {
+			if nb/i != 1 {
 				fmt.Printf("%d*", i)
 			} else {
 				fmt.Printf("%d", i)
 			}
-			n /= i
+			nb /= i
 			i--
 		}
 	}
 	fmt.Println()
-}
-
-func isPrime(n int) bool {
-	if n <= 1 {
-		return false
-	}
-	for i := 2; i*i <= n; i++ {
-		if n%i == 0 {
-			return false
-		}
-	}
-	return true
 }

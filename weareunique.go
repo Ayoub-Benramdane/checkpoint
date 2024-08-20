@@ -12,16 +12,16 @@ func main() {
 
 func WeAreUnique(str1, str2 string) int {
 	count := 0
-	unique := false
 	str := str1 + str2
 	if str == "" {
 		return -1
 	}
 	for i := 0; i < len(str); i++ {
-		unique = true
+		unique := true
 		for j := 0; j < len(str); j++ {
 			if j != i && str[i] == str[j] {
 				unique = false
+				break
 			}
 		}
 		if unique {

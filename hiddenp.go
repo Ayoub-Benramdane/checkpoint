@@ -1,34 +1,23 @@
 package main
 
 import (
+	"fmt"
 	"os"
-
-	"github.com/01-edu/z01"
 )
 
 func main() {
-	args := os.Args[1:]
-	if len(args) != 2 {
+	if len(os.Args) != 3 {
 		return
 	}
-	arg1 := args[0]
-	arg2 := args[1]
-	exist := true
-	count := 0
-	for i := 0; i < len(arg1); i++ {
-		for j := count; j < len(arg2); j++ {
-			count++
-			if arg1[i] == arg2[j] {
-				exist = true
-				break
-			} else {
-				exist = false
+	i := 0
+	for _, c := range os.Args[2] {
+		if rune(os.Args[1][i]) == c {
+			i++
+			if i >= len(os.Args[1]) {
+				fmt.Println("1")
+				return
 			}
 		}
 	}
-	if exist {
-		z01.PrintRune('1')
-		return
-	}
-	z01.PrintRune('0')
+	fmt.Println("0")
 }

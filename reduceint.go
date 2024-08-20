@@ -19,7 +19,5 @@ func main() {
 }
 
 func ReduceInt(a []int, f func(int, int) int) {
-	res := 0
-	res = f(a[0], a[1])
-	fmt.Println(res)
+	fmt.Println(f(a[0], a[1]))
 }

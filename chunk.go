@@ -1,6 +1,8 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+)
 
 func main() {
 	Chunk([]int{}, 10)
@@ -11,30 +13,18 @@ func main() {
 }
 
 func Chunk(slice []int, size int) {
-	parentSlice := [][]int{}
-	newSlice := []int{}
-	count := 0
-	if size <= 0 {
+	res := []int{}
+	resFinal := [][]int{}
+	if size == 0 {
 		fmt.Println()
 		return
 	}
 	for i := 0; i < len(slice); i++ {
-		if i+size > len(slice) && count < len(slice) {
-			newSlice = append(newSlice, count)
-			count++
-		} else if i >= count {
-			for j := i; j < i+size; j++ {
-				count++
-				newSlice = append(newSlice, slice[j])
-			}
-			if newSlice != nil {
-				parentSlice = append(parentSlice, newSlice)
-			}
-			newSlice = nil
+		res = append(res, slice[i])
+		if (i+1)%size == 0 || i == len(slice)-1 {
+			resFinal = append(resFinal, res)
+			res = nil
 		}
 	}
-	if newSlice != nil {
-		parentSlice = append(parentSlice, newSlice)
-	}
-	fmt.Println(parentSlice)
+	fmt.Println(resFinal)
 }

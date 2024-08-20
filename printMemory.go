@@ -1,6 +1,10 @@
 package main
 
-import "github.com/01-edu/z01"
+import (
+	"unicode"
+
+	"github.com/01-edu/z01"
+)
 
 func main() {
 	PrintMemory([10]byte{'h', 'e', 'l', 'l', 'o', 16, 21, '*'})
@@ -18,7 +22,7 @@ func PrintMemory(arr [10]byte) {
 		}
 	}
 	for _, c := range arr {
-		if c > 31 && c < 127 {
+		if unicode.IsGraphic(rune(c)) {
 			z01.PrintRune(rune(c))
 		} else {
 			z01.PrintRune('.')
