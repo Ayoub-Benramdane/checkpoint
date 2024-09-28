@@ -7,75 +7,27 @@ import (
 )
 
 func main() {
-	if len(os.Args[1:]) != 1 {
+	if len(os.Args) != 2 {
 		return
 	}
-	arg, err := strconv.Atoi(os.Args[1])
-	res := ""
-	res1 := ""
-	resFinal := ""
-	if err != nil || arg >= 4000 {
+	nb, err := strconv.Atoi(os.Args[1])
+	if nb < 1 || nb > 3999 || err != nil {
 		fmt.Println("ERROR: cannot convert to roman digit")
 		return
 	}
-	for arg > 0 {
-		if arg >= 1000 {
-			res += "M"
-			res1 += "M+"
-			arg -= 1000
-		} else if arg >= 900 {
-			res += "CM"
-			res1 += "(M-C)+"
-			arg -= 900
-		} else if arg >= 500 {
-			res += "D"
-			res1 += "D+"
-			arg -= 500
-		} else if arg >= 400 {
-			res += "CD"
-			res1 += "(D-C)+"
-			arg -= 400
-		} else if arg >= 100 {
-			res += "C"
-			res1 += "C+"
-			arg -= 100
-		} else if arg >= 90 {
-			res += "XC"
-			res1 += "(C-X)+"
-			arg -= 90
-		} else if arg >= 50 {
-			res += "L"
-			res1 += "L+"
-			arg -= 50
-		} else if arg >= 40 {
-			res += "XL"
-			res1 += "(L-X)+"
-			arg -= 40
-		} else if arg >= 10 {
-			res += "X"
-			res1 += "X+"
-			arg -= 10
-		} else if arg >= 9 {
-			res += "IX"
-			res1 += "(X-I)+"
-			arg -= 9
-		} else if arg >= 5 {
-			res += "V"
-			res1 += "V+"
-			arg -= 5
-		} else if arg >= 4 {
-			res += "IV"
-			res1 += "(V-I)+"
-			arg -= 4
-		} else if arg >= 1 {
-			res += "I"
-			res1 += "I+"
-			arg -= 1
+	values := []int{1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1}
+	roman := []string{"M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"}
+	var str1, str2 string
+	for i := 0; i < len(values); i++ {
+		for nb >= values[i] {
+			nb -= values[i]
+			str2 += roman[i]
+			if values[i] == 900 || values[i] == 400 || values[i] == 90 || values[i] == 40 || values[i] == 9 || values[i] == 4 {
+				str1 += "(" + roman[i][1:] + "-" + roman[i][:1] + ")+"
+			} else {
+				str1 += roman[i] + "+"
+			}
 		}
 	}
-	for i := 0; i < len(res1)-1; i++ {
-		resFinal += string(res1[i])
-	}
-	fmt.Println(resFinal)
-	fmt.Println(res)
+	fmt.Println(str1[:len(str1)-1] + "\n" + str2)
 }
